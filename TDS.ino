@@ -1,5 +1,5 @@
 #include <LiquidCrystal_I2C.h> // Library for LCD
-LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C address 0x27, 16 column and 2 rows
+LiquidCrystal_I2C lcd(0x27, 20, 4); // I2C address 0x27, 16 column and 2 rows
 #define TdsSensorPin A1
 #define VREF 5.0      // analog reference voltage(Volt) of the ADC
 #define SCOUNT  30           // sum of sample point
@@ -46,25 +46,30 @@ void loop()
   
 
   lcd.setCursor(0, 0);
-  lcd.print("TDS Value: "); 
+  lcd.print("TDS Value:");
   lcd.print(tdsValue);
-  lcd.setCursor(0, 1);
+  lcd.print("ppm");
   if(tdsValue == 0){
+    lcd.setCursor(0, 1);
     lcd.print("Dip the probe");
   }
   else if(tdsValue>0 && tdsValue<100){
+    lcd.setCursor(0, 1);
     lcd.print("Ideal Water");
   }
-  else if(tdsValue>100 && tdsValue<400){
+  else if(tdsValue>100 && tdsValue<500){
+    lcd.setCursor(0, 1);
     lcd.print("UV Filteration");
   }
-  else if(tdsValue>400 && tdsValue<800){
+  else if(tdsValue>500 && tdsValue<900){
+    lcd.setCursor(0, 1);
     lcd.print("UV+RO Filteration");
   }
-  else if(tdsValue>800){
+  else if(tdsValue>900){
+    lcd.setCursor(0, 1);
     lcd.print("UV+RO+UF Filteration");
   }
-  lcd.setCursor(0, 2);
+  lcd.setCursor(0, 3);
   lcd.print("Thank you!!");
    }
 }
