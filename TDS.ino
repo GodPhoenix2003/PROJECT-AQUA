@@ -7,6 +7,9 @@ int analogBuffer[SCOUNT];    // store the analog value in the array, read from A
 int analogBufferTemp[SCOUNT];
 int analogBufferIndex = 0,copyIndex = 0;
 float averageVoltage = 0,tdsValue = 0,temperature = 25;
+#define LED1 13
+#define LED2 12
+#define LED3 11
 
 void setup()
 {
@@ -14,6 +17,9 @@ void setup()
     pinMode(TdsSensorPin,INPUT);
     lcd.init(); // initialize the lcd
   lcd.backlight();
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
 }
 
 void loop()
@@ -60,14 +66,20 @@ void loop()
   else if(tdsValue>100 && tdsValue<500){
     lcd.setCursor(0, 1);
     lcd.print("UV Filteration");
+    digitalWrite(LED1, HIGH);
   }
   else if(tdsValue>500 && tdsValue<900){
     lcd.setCursor(0, 1);
     lcd.print("UV+RO Filteration");
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, HIGH);
   }
   else if(tdsValue>900){
     lcd.setCursor(0, 1);
     lcd.print("UV+RO+UF Filteration");
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, HIGH);
+    digitalWrite(LED3, HIGH);
   }
   lcd.setCursor(0, 3);
   lcd.print("Thank you!!");
