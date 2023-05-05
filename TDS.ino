@@ -10,6 +10,7 @@ float averageVoltage = 0,tdsValue = 0,temperature = 25;
 #define LED1 13
 #define LED2 12
 #define LED3 11
+#define LED4 10
 
 void setup()
 {
@@ -20,6 +21,7 @@ void setup()
   pinMode(LED1, OUTPUT);
   pinMode(LED2, OUTPUT);
   pinMode(LED3, OUTPUT);
+  pinMode(LED4, OUTPUT);
 }
 
 void loop()
@@ -54,27 +56,57 @@ void loop()
   lcd.setCursor(0, 0);
   lcd.print("TDS Value:");
   lcd.print(tdsValue);
-  lcd.print("ppm");
   if(tdsValue == 0){
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, LOW);
+    digitalWrite(LED3, LOW);
+    digitalWrite(LED4, LOW);
+    lcd.setCursor(0, 1);
+    lcd.print("                    ");
     lcd.setCursor(0, 1);
     lcd.print("Dip the probe");
   }
   else if(tdsValue>0 && tdsValue<100){
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, LOW);
+    digitalWrite(LED3, LOW);
+    digitalWrite(LED4, LOW);
+    lcd.setCursor(0, 1);
+    lcd.print("                    ");
     lcd.setCursor(0, 1);
     lcd.print("Ideal Water");
+    digitalWrite(LED4, HIGH);
   }
   else if(tdsValue>100 && tdsValue<500){
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, LOW);
+    digitalWrite(LED3, LOW);
+    digitalWrite(LED4, LOW);
+    lcd.setCursor(0, 1);
+    lcd.print("                    ");
     lcd.setCursor(0, 1);
     lcd.print("UV Filteration");
     digitalWrite(LED1, HIGH);
   }
   else if(tdsValue>500 && tdsValue<900){
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, LOW);
+    digitalWrite(LED3, LOW);
+    digitalWrite(LED4, LOW);
+    lcd.setCursor(0, 1);
+    lcd.print("                    ");
     lcd.setCursor(0, 1);
     lcd.print("UV+RO Filteration");
     digitalWrite(LED1, HIGH);
     digitalWrite(LED2, HIGH);
   }
   else if(tdsValue>900){
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, LOW);
+    digitalWrite(LED3, LOW);
+    digitalWrite(LED4, LOW);
+    lcd.setCursor(0, 1);
+    lcd.print("                    ");
     lcd.setCursor(0, 1);
     lcd.print("UV+RO+UF Filteration");
     digitalWrite(LED1, HIGH);
