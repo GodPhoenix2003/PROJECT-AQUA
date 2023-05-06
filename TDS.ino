@@ -56,7 +56,7 @@ void loop()
   lcd.setCursor(0, 0);
   lcd.print("TDS Value:");
   lcd.print(tdsValue);
-  if(tdsValue == 0){
+  if(tdsValue < 10 && tdsValue >= 0){
     digitalWrite(LED1, LOW);
     digitalWrite(LED2, LOW);
     digitalWrite(LED3, LOW);
@@ -66,7 +66,7 @@ void loop()
     lcd.setCursor(0, 1);
     lcd.print("Dip the probe");
   }
-  else if(tdsValue>0 && tdsValue<100){
+  else if(tdsValue>10 && tdsValue<100){
     digitalWrite(LED1, LOW);
     digitalWrite(LED2, LOW);
     digitalWrite(LED3, LOW);
